@@ -48,6 +48,12 @@ export default function App() {
     []
   )
 
+  function trackEvent(eventName) {
+    if (typeof window !== 'undefined' && typeof window.fbq === 'function') {
+      window.fbq('track', eventName)
+    }
+  }
+
   function getProximoGrupo() {
     const ativos = grupos.filter((g) => g.ativo)
 
@@ -61,7 +67,7 @@ export default function App() {
     return ativos[proximo]
   }
 
-  function entrar() {
+  function entrarNoGrupo() {
     const grupo = getProximoGrupo()
 
     if (!grupo) {
@@ -69,6 +75,7 @@ export default function App() {
       return
     }
 
+    trackEvent('Lead')
     setLoading(true)
 
     const novaAba = window.open('', '_blank')
@@ -86,6 +93,16 @@ export default function App() {
     }, 700)
   }
 
+  function abrirTelegram() {
+    trackEvent('Contact')
+    window.open(TELEGRAM, '_blank', 'noopener,noreferrer')
+  }
+
+  function abrirCanal() {
+    trackEvent('Contact')
+    window.open(CANAL, '_blank', 'noopener,noreferrer')
+  }
+
   return (
     <div className="min-h-screen bg-zinc-100 flex items-center justify-center px-4 py-10">
       <div className="w-full max-w-md bg-white rounded-[28px] shadow-xl p-6 text-center relative">
@@ -93,9 +110,13 @@ export default function App() {
           🦈 AS MELHORES PROMOÇÕES TODOS OS DIAS 🦈
         </div>
 
-        <img src={logo} className="w-28 mx-auto mb-5" alt="Tubarão das Promo" />
+        <img
+          src={logo}
+          alt="Tubarão das Promo"
+          className="w-28 mx-auto mb-5"
+        />
 
-        <h2 className="text-3xl font-extrabold">
+        <h2 className="text-3xl font-extrabold text-zinc-900">
           ⚠️ QUER ECONOMIZAR? ⚠️
         </h2>
 
@@ -103,18 +124,18 @@ export default function App() {
           Entre nos grupos e aproveite as melhores promoções.
         </p>
 
-        <p className="font-bold mt-2 text-lg">
+        <p className="font-bold mt-2 text-lg text-zinc-900">
           100% GRÁTIS!
         </p>
 
         <div className="mt-6">
-          <p className="text-sm font-semibold mb-2">
+          <p className="text-sm text-zinc-700 font-semibold mb-2">
             🔥 Mais de 22.800 pessoas economizando todos os dias
           </p>
 
           <button
-            onClick={entrar}
-            className="w-full bg-green-500 text-white font-extrabold py-4 rounded-xl text-lg"
+            onClick={entrarNoGrupo}
+            className="w-full bg-green-500 hover:bg-green-600 text-white font-extrabold py-4 rounded-xl text-lg transition"
           >
             🔥 ENTRAR NO GRUPO AGORA
           </button>
@@ -125,29 +146,25 @@ export default function App() {
         </div>
 
         <div className="mt-5">
-          <a
-            href={TELEGRAM}
-            target="_blank"
-            rel="noreferrer"
-            className="block bg-sky-500 text-white font-bold py-4 rounded-xl"
+          <button
+            onClick={abrirTelegram}
+            className="w-full bg-sky-500 hover:bg-sky-600 text-white font-bold py-4 rounded-xl transition"
           >
             ✈️ Entrar no Canal do Telegram
-          </a>
+          </button>
         </div>
 
         <div className="mt-4">
-          <a
-            href={CANAL}
-            target="_blank"
-            rel="noreferrer"
-            className="block bg-green-600 text-white font-bold py-4 rounded-xl"
+          <button
+            onClick={abrirCanal}
+            className="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-4 rounded-xl transition"
           >
             📢 Canal do WhatsApp
-          </a>
+          </button>
         </div>
 
-        <div className="mt-8 pt-6 border-t">
-          <h3 className="font-bold text-xl">
+        <div className="mt-8 pt-6 border-t border-zinc-200">
+          <h3 className="font-bold text-xl text-zinc-900">
             Postamos promoções das melhores lojas do Brasil!
           </h3>
 
