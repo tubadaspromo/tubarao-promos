@@ -1,0 +1,166 @@
+import { useMemo, useState } from 'react'
+import logo from './assets/logo.png'
+import ml from './assets/mercadolivre.png'
+import shopee from './assets/shopee.png'
+import magalu from './assets/magalu.png'
+import casas from './assets/casas.png'
+import amazon from './assets/amazon.png'
+
+export default function App() {
+  const [loading, setLoading] = useState(false)
+
+  // 🔥 COLE AQUI SEUS LINKS DO TELEGRAM E CANAL
+  const TELEGRAM = "https://whatsapp.com/channel/0029Vb8TAvwHwXbKlDM83c3c"
+  const CANAL = "https://whatsapp.com/channel/0029Vb8TAvwHwXbKlDM83c3c"
+
+  const grupos = useMemo(
+    () => [
+      { link: 'https://chat.whatsapp.com/DenZEOithvv6hzOFg9LqpU', ativo: true },
+      { link: 'https://chat.whatsapp.com/Fnz7E5KFjBP7iKp6ap4IxN', ativo: true },
+      { link: 'https://chat.whatsapp.com/LOYGyPNLcpUGKziWlYfL96', ativo: true },
+      { link: 'https://chat.whatsapp.com/ElvschKh32H8w9leHcfpLu', ativo: true },
+      { link: 'https://chat.whatsapp.com/DDwSkSlqKtGLJhW3HGfeTP', ativo: true },
+      { link: 'https://chat.whatsapp.com/DiZ1YrbSnZW5jHR4hxap2O', ativo: true },
+      { link: 'https://chat.whatsapp.com/KAT7L7DcVVRDWm6yJ1bXmw', ativo: true },
+      { link: 'https://chat.whatsapp.com/IaMAJnR9Eko5v1TKyxxeob', ativo: true },
+      { link: 'https://chat.whatsapp.com/IImeC6YZ5E3LiUxKGMt8rB', ativo: true },
+      { link: 'https://chat.whatsapp.com/LolKSuFw1vzAoT0BSFBsFT', ativo: true },
+      { link: 'https://chat.whatsapp.com/Dsyb40EACt4Bv9v6sQxHcw', ativo: true },
+      { link: 'https://chat.whatsapp.com/DmEVhdCQoIH8fH4uTHYxdo', ativo: true },
+      { link: 'https://chat.whatsapp.com/LiYxuUuatV3CadSfpFiG4a', ativo: true },
+      { link: 'https://chat.whatsapp.com/ISjSt7Otc8PGbYPlvFUM3j', ativo: true },
+      { link: 'https://chat.whatsapp.com/DY8uGMMuLVb6o8HSBDCDhz', ativo: true },
+      { link: 'https://chat.whatsapp.com/Dp41yOiRTyK98X6O6XM5Yv', ativo: true },
+      { link: 'https://chat.whatsapp.com/EC7oUgzRluO1m758GlpTYn', ativo: true },
+      { link: 'https://chat.whatsapp.com/LRqG9VRmWJJLIoRgUqQCxm', ativo: true },
+      { link: 'https://chat.whatsapp.com/DpsJMqkAwkz3EMGH9YMefi', ativo: true },
+      { link: 'https://chat.whatsapp.com/FProIuu0XTTKOpi8uf3XVm', ativo: true },
+      { link: 'https://chat.whatsapp.com/COd0dILNzQfLZ2pdZCH7qc', ativo: true },
+      { link: 'https://chat.whatsapp.com/GytR4R8CwYV78VHlU8mCGB', ativo: true },
+      { link: 'https://chat.whatsapp.com/CtHu6KB87n08p7qolDGKGR', ativo: true },
+      { link: 'https://chat.whatsapp.com/Jmmz5yThODz5rdCbZJQP5x', ativo: true },
+      { link: 'https://chat.whatsapp.com/HZU99CnCz282NkRa1OYKSO', ativo: true },
+      { link: 'https://chat.whatsapp.com/GIlr54Yg37a5y4MRJBYgPj', ativo: true },
+      { link: 'https://chat.whatsapp.com/ESYLAnyqVerDWbU0go56rA', ativo: true },
+      { link: 'https://chat.whatsapp.com/J4R6Zko00qmGTiK6nCRg9T', ativo: true },
+      { link: 'https://chat.whatsapp.com/F4uOcR69AG8D8jQFmEMweP', ativo: true },
+      { link: 'https://chat.whatsapp.com/EYAWx5IbvnF9wu9nIpIFJH', ativo: true },
+    ],
+    []
+  )
+
+  function getProximoGrupo() {
+    const chave = 'rotacao_grupos'
+    const ultimo = Number(localStorage.getItem(chave) || '-1')
+    const proximo = (ultimo + 1) % grupos.length
+    localStorage.setItem(chave, proximo)
+    return grupos[proximo]
+  }
+
+  function entrar() {
+    const grupo = getProximoGrupo()
+    setLoading(true)
+
+    setTimeout(() => {
+      window.open(grupo.link, '_blank')
+      setLoading(false)
+    }, 1200)
+  }
+
+  return (
+    <div className="min-h-screen bg-zinc-100 flex items-center justify-center px-4 py-10">
+      <div className="w-full max-w-md bg-white rounded-[28px] shadow-xl p-6 text-center relative">
+
+        <div className="mb-6 rounded-full bg-[#BFE8FF] text-[#0B4F7A] text-sm font-bold py-3 px-4">
+          🦈 AS MELHORES PROMOÇÕES TODOS OS DIAS 🦈
+        </div>
+
+        <img src={logo} className="w-28 mx-auto mb-5" />
+
+        <h2 className="text-3xl font-extrabold">
+          ⚠️ QUER ECONOMIZAR? ⚠️
+        </h2>
+
+        <p className="mt-3 text-zinc-600">
+          Entre nos grupos e aproveite as melhores promoções.
+        </p>
+
+        <p className="font-bold mt-2 text-lg">
+          100% GRÁTIS!
+        </p>
+
+        <div className="mt-6">
+          <p className="text-sm font-semibold mb-2">
+            🔥 Mais de 22.800 pessoas economizando todos os dias
+          </p>
+
+          <button
+            onClick={entrar}
+            className="w-full bg-green-500 text-white font-extrabold py-4 rounded-xl text-lg"
+          >
+            🔥 ENTRAR NO GRUPO AGORA
+          </button>
+
+          <p className="mt-2 text-xs text-red-500 font-semibold">
+            ⚠️ Vagas podem ser limitadas a qualquer momento
+          </p>
+        </div>
+
+        {/* TELEGRAM */}
+        <div className="mt-5">
+          <a
+            href={TELEGRAM}
+            target="_blank"
+            rel="noreferrer"
+            className="block bg-sky-500 text-white font-bold py-4 rounded-xl"
+          >
+            ✈️ Entrar no Canal do Telegram
+          </a>
+        </div>
+
+        {/* CANAL WHATSAPP */}
+        <div className="mt-4">
+          <a
+            href={CANAL}
+            target="_blank"
+            rel="noreferrer"
+            className="block bg-green-600 text-white font-bold py-4 rounded-xl"
+          >
+            📢 Canal do WhatsApp
+          </a>
+        </div>
+
+        <div className="mt-8 pt-6 border-t">
+          <h3 className="font-bold text-xl">
+            Postamos promoções das melhores lojas do Brasil!
+          </h3>
+
+          <div className="mt-5 flex flex-wrap justify-center gap-3">
+            <Logo img={amazon} />
+            <Logo img={ml} />
+            <Logo img={shopee} />
+            <Logo img={magalu} />
+            <Logo img={casas} />
+          </div>
+        </div>
+
+        {loading && (
+          <div className="absolute inset-0 bg-white flex flex-col items-center justify-center">
+            <div className="w-10 h-10 border-4 border-blue-300 border-t-blue-600 rounded-full animate-spin" />
+            <p className="mt-4 font-bold">
+              Conectando você ao melhor grupo...
+            </p>
+          </div>
+        )}
+      </div>
+    </div>
+  )
+}
+
+function Logo({ img }) {
+  return (
+    <div className="h-14 w-14 rounded-full bg-white shadow-sm flex items-center justify-center p-2">
+      <img src={img} className="max-h-7 object-contain" />
+    </div>
+  )
+}
