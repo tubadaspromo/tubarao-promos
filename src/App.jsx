@@ -9,9 +9,8 @@ import amazon from './assets/amazon.png'
 export default function App() {
   const [loading, setLoading] = useState(false)
 
-  // 🔥 COLE AQUI SEUS LINKS DO TELEGRAM E CANAL
-  const TELEGRAM = "https://whatsapp.com/channel/0029Vb8TAvwHwXbKlDM83c3c"
-  const CANAL = "https://whatsapp.com/channel/0029Vb8TAvwHwXbKlDM83c3c"
+  const TELEGRAM = 'https://t.me/tubadaspromo'
+  const CANAL = 'https://whatsapp.com/channel/0029Vb8TAvwHwXbKlDM83c3c'
 
   const grupos = useMemo(
     () => [
@@ -50,32 +49,51 @@ export default function App() {
   )
 
   function getProximoGrupo() {
+    const ativos = grupos.filter((g) => g.ativo)
+
+    if (ativos.length === 0) return null
+
     const chave = 'rotacao_grupos'
     const ultimo = Number(localStorage.getItem(chave) || '-1')
-    const proximo = (ultimo + 1) % grupos.length
+    const proximo = (ultimo + 1) % ativos.length
+
     localStorage.setItem(chave, proximo)
-    return grupos[proximo]
+    return ativos[proximo]
   }
 
   function entrar() {
     const grupo = getProximoGrupo()
+
+    if (!grupo) {
+      alert('Nenhum grupo ativo disponível.')
+      return
+    }
+
     setLoading(true)
 
-    setTimeout(() => {
-      window.open(grupo.link, '_blank')
+    const novaAba = window.open('', '_blank')
+
+    if (!novaAba) {
       setLoading(false)
-    }, 1200)
+      alert('O navegador bloqueou a abertura da aba. Libere pop-ups para este site.')
+      return
+    }
+
+    novaAba.location.href = grupo.link
+
+    setTimeout(() => {
+      setLoading(false)
+    }, 700)
   }
 
   return (
     <div className="min-h-screen bg-zinc-100 flex items-center justify-center px-4 py-10">
       <div className="w-full max-w-md bg-white rounded-[28px] shadow-xl p-6 text-center relative">
-
         <div className="mb-6 rounded-full bg-[#BFE8FF] text-[#0B4F7A] text-sm font-bold py-3 px-4">
           🦈 AS MELHORES PROMOÇÕES TODOS OS DIAS 🦈
         </div>
 
-        <img src={logo} className="w-28 mx-auto mb-5" />
+        <img src={logo} className="w-28 mx-auto mb-5" alt="Tubarão das Promo" />
 
         <h2 className="text-3xl font-extrabold">
           ⚠️ QUER ECONOMIZAR? ⚠️
@@ -106,7 +124,6 @@ export default function App() {
           </p>
         </div>
 
-        {/* TELEGRAM */}
         <div className="mt-5">
           <a
             href={TELEGRAM}
@@ -118,7 +135,6 @@ export default function App() {
           </a>
         </div>
 
-        {/* CANAL WHATSAPP */}
         <div className="mt-4">
           <a
             href={CANAL}
@@ -136,16 +152,16 @@ export default function App() {
           </h3>
 
           <div className="mt-5 flex flex-wrap justify-center gap-3">
-            <Logo img={amazon} />
-            <Logo img={ml} />
-            <Logo img={shopee} />
-            <Logo img={magalu} />
-            <Logo img={casas} />
+            <Logo img={amazon} alt="Amazon" />
+            <Logo img={ml} alt="Mercado Livre" />
+            <Logo img={shopee} alt="Shopee" />
+            <Logo img={magalu} alt="Magalu" />
+            <Logo img={casas} alt="Casas Bahia" />
           </div>
         </div>
 
         {loading && (
-          <div className="absolute inset-0 bg-white flex flex-col items-center justify-center">
+          <div className="absolute inset-0 bg-white/95 rounded-[28px] flex flex-col items-center justify-center">
             <div className="w-10 h-10 border-4 border-blue-300 border-t-blue-600 rounded-full animate-spin" />
             <p className="mt-4 font-bold">
               Conectando você ao melhor grupo...
@@ -157,10 +173,10 @@ export default function App() {
   )
 }
 
-function Logo({ img }) {
+function Logo({ img, alt }) {
   return (
     <div className="h-14 w-14 rounded-full bg-white shadow-sm flex items-center justify-center p-2">
-      <img src={img} className="max-h-7 object-contain" />
+      <img src={img} alt={alt} className="max-h-7 object-contain" />
     </div>
   )
 }
