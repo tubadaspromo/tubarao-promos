@@ -15,7 +15,6 @@ export default function App() {
   const grupos = useMemo(
     () => [
       { link: 'https://chat.whatsapp.com/H4AoNynOtHp0PHiNFjjsYd?s=cl&p=i&ilr=4&iam=0', ativo: true },
-      { link: 'https://chat.whatsapp.com/Fnz7E5KFjBP7iKp6ap4IxN', ativo: true },
     ],
     []
   )
