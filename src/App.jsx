@@ -14,13 +14,19 @@ export default function App() {
 
   const grupos = useMemo(
     () => [
-      { link: 'https://chat.whatsapp.com/H4AoNynOtHp0PHiNFjjsYd?s=cl&p=i&ilr=4&iam=0', ativo: true },
+      {
+        link: 'https://chat.whatsapp.com/H4AoNynOtHp0PHiNFjjsYd',
+        ativo: true,
+      },
     ],
     []
   )
 
   function trackEvent(eventName) {
-    if (typeof window !== 'undefined' && typeof window.fbq === 'function') {
+    if (
+      typeof window !== 'undefined' &&
+      typeof window.fbq === 'function'
+    ) {
       window.fbq('track', eventName)
     }
   }
@@ -35,6 +41,7 @@ export default function App() {
     const proximo = (ultimo + 1) % ativos.length
 
     localStorage.setItem(chave, proximo)
+
     return ativos[proximo]
   }
 
@@ -49,19 +56,8 @@ export default function App() {
     trackEvent('Lead')
     setLoading(true)
 
-    const novaAba = window.open('', '_blank')
-
-    if (!novaAba) {
-      setLoading(false)
-      alert('O navegador bloqueou a abertura da aba. Libere pop-ups para este site.')
-      return
-    }
-
-    novaAba.location.href = grupo.link
-
-    setTimeout(() => {
-      setLoading(false)
-    }, 700)
+    // Abre diretamente o convite do WhatsApp
+    window.location.href = grupo.link
   }
 
   function abrirTelegram() {
@@ -77,6 +73,7 @@ export default function App() {
   return (
     <div className="min-h-screen bg-zinc-100 flex items-center justify-center px-4 py-10">
       <div className="w-full max-w-md bg-white rounded-[28px] shadow-xl p-6 text-center relative">
+
         <div className="mb-6 rounded-full bg-[#BFE8FF] text-[#0B4F7A] text-sm font-bold py-3 px-4">
           🦈 AS MELHORES PROMOÇÕES TODOS OS DIAS 🦈
         </div>
@@ -151,11 +148,13 @@ export default function App() {
         {loading && (
           <div className="absolute inset-0 bg-white/95 rounded-[28px] flex flex-col items-center justify-center">
             <div className="w-10 h-10 border-4 border-blue-300 border-t-blue-600 rounded-full animate-spin" />
+
             <p className="mt-4 font-bold">
               Conectando você ao melhor grupo...
             </p>
           </div>
         )}
+
       </div>
     </div>
   )
@@ -164,7 +163,11 @@ export default function App() {
 function Logo({ img, alt }) {
   return (
     <div className="h-14 w-14 rounded-full bg-white shadow-sm flex items-center justify-center p-2">
-      <img src={img} alt={alt} className="max-h-7 object-contain" />
+      <img
+        src={img}
+        alt={alt}
+        className="max-h-7 object-contain"
+      />
     </div>
   )
 }
