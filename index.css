@@ -1,0 +1,20 @@
+@import '@fontsource/barlow/400.css';
+@import '@fontsource/barlow/500.css';
+@import '@fontsource/barlow/600.css';
+@import '@fontsource/barlow-condensed/800-italic.css';
+
+:root {
+  --ink: #0a1a33;
+  --blue: #1e7fe0;
+  --gold: #ffb300;
+  --red: #e11d2e;
+  --green: #1fae55;
+  --green-dark: #168a42;
+  --muted: #4d5b70;
+  font-family: 'Barlow', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  color: var(--ink);
+  -webkit-text-size-adjust: 100%;
+}
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; min-width: 320px; background: #070d18; }
